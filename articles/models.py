@@ -1,9 +1,8 @@
+from time import time
 from django.db import models
 from django.utils import timezone
-from django.shortcuts import reverse
 
 from pytils.translit import slugify
-from time import time
 
 
 def slug_gen(text):
