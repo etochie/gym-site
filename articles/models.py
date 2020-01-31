@@ -22,8 +22,8 @@ def slug_gen(text):
 class Article(models.Model):
 
     title = models.CharField(max_length=200)
-    slug = models.SlugField(max_length=100, unique=True, blank=True,)
-    body = models.TextField()
+    slug = models.SlugField(max_length=100, unique=True)
+    body = models.TextField(default="")
     pub_date = models.DateTimeField(default=timezone.now, blank=False)
     views = models.IntegerField(default=0)
 
@@ -36,4 +36,18 @@ class Article(models.Model):
         if not self.id:
             self.slug = slug_gen(self.title[:20])
         return super().save(*args, **kwargs)
+
+
+class ArticleStatistic(models.Model):
+    """Класс для подсчета кол-ва просмотров статей"""
+
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    date = models.DateField(default=timezone.now)
+    views = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.article.title
+
+
+    
 
