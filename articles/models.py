@@ -25,7 +25,6 @@ class Article(models.Model):
     slug = models.SlugField(max_length=100, unique=True)
     body = models.TextField(default="")
     pub_date = models.DateTimeField(default=timezone.now, blank=False)
-    views = models.IntegerField(default=0)
 
     def __str__(self):
         return self.title
